@@ -1,0 +1,33 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!-- Matric Number Insert Page, enter matric number to view detail -->
+<script type="text/javascript" src="~/js/timeout.js"></script>
+<link rel="stylesheet" href="~/css/hide.css">
+<div class="hidden">
+    <div class="text-center pt-5 pb-3">
+        <h1 class="font-weight-bold">Sistem E-Clearance UiTM Puncak Perdana</h1>
+        <p>Sila Isi Nombor Matrik anda</p>
+    </div>
+
+    <div class="container text-center">
+        <form asp-action="Edit" method="get">
+            <div id="show" class="form-group">
+                <input type="text" class="form-group" name="id" />
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+        <div class="container text-center pt-5">
+            <form asp-action="Index">
+                <div class="form-group">
+                    <input type="submit" class="btn btn-warning" value="Kembali" />
+                </div>
+            </form>
+        </div>
+        <div class="text-center pt-3">
+            <p id="alert" style="color:red;display:none;"><strong>Loading, Please Wait</strong></p>
+        </div>
+    </div>
+</div>

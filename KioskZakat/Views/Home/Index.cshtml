@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<!-- Index page for zakat kiosk, timeout 10 sec to ads -->
+
+<script type="text/javascript" src="~/js/ads.js"></script>
+<link rel="stylesheet" href="~/css/hide.css">
+
+
+<div class="text-center pt-5 pb-3">
+    <h1 class="fs-1 fw-bold">Pilih Menu</h1>
+</div>
+
+
+<div class="container pt-5">
+    <div class="hidden">
+        <div class="row">
+            <div class="col-4 pb-4 text-center">
+                <a asp-controller="Home" asp-action="Infaq">
+                    <img src="~/Image/infaq.png" class="rounded w-50 h-50">
+                </a>
+                <p class="text-center"><strong>Infaq</strong></p>
+
+            </div>
+            <div class="col-4 pb-4 text-center">
+                <a asp-controller="Home" asp-action="Gerobok">
+                    <img src="~/Image/rezeki.jpg" class="rounded w-50 h-50">
+                </a>
+                <p class="text-center"><strong>Gerobok Rezeki</strong></p>
+
+            </div>
+            <div class="col-4 pb-4 text-center">
+                <a asp-controller="Students" asp-action="Index">
+                    <img src="~/Image/eclearance.png" class="rounded w-50">
+                </a>
+                <p class="text-center"><strong>Cetak Baucar</strong></p>
+            </div>
+        </div>
+    </div>
+    <div class="pt-2">
+        <div class="text-center">
+            <p><strong>Dengan Kerjasama:</strong></p>
+        </div>
+        <div class="row text-center flex-fill">
+            <div class="col"><img src="~/Image/mbsa.png" class="rounded w-25 h-75"></div>
+            <div class="col"><img src="~/Image/uitm-vector-logo.png" class="rounded w-25 h-75"></div>
+            <!--<div class="col"><img src="~/Image/mbsa.png" class="rounded w-25"></div>
+    <div class="col"><img src="~/Image/mbsa.png" class="rounded w-25"></div>
+    <div class="col"><img src="~/Image/mbsa.png" class="rounded w-25"></div>-->
+        </div>
+    </div>
+</div>
+
+<!--<div class="container fixed-bottom" style="height: 60px;">
+    <div class="text-center">
+        <p><strong>Dengan Kerjasama:</strong></p>
+    </div>
+    <div class="row text-center flex-fill">
+        <div class="col"><img src="~/Image/mbsa.png" class="rounded w-50"></div>
+        <div class="col"><img src="~/Image/mbsa.png" class="rounded w-50"></div>
+        <div class="col"><img src="~/Image/mbsa.png" class="rounded w-50"></div>
+        <div class="col"><img src="~/Image/mbsa.png" class="rounded w-50"></div>
+        <div class="col"><img src="~/Image/mbsa.png" class="rounded w-50"></div>
+    </div>
+
+</div>-->

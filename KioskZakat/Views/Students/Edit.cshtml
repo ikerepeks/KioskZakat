@@ -1,0 +1,66 @@
+﻿@model KioskZakat.Models.Student
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Student</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="noMatric" />
+            <div class="form-group">
+                <label asp-for="nama" class="control-label"></label>
+                <input asp-for="nama" class="form-control" />
+                <span asp-validation-for="nama" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="noBilik" class="control-label"></label>
+                <input asp-for="noBilik" class="form-control" />
+                <span asp-validation-for="noBilik" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="kodProgram" class="control-label"></label>
+                <input asp-for="kodProgram" class="form-control" />
+                <span asp-validation-for="kodProgram" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="semester" class="control-label"></label>
+                <input asp-for="semester" class="form-control" />
+                <span asp-validation-for="semester" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="checkout" /> @Html.DisplayNameFor(model => model.checkout)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="kunci" /> @Html.DisplayNameFor(model => model.kunci)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="tag" /> @Html.DisplayNameFor(model => model.tag)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="checkoutTime" class="control-label"></label>
+                <input asp-for="checkoutTime" class="form-control" />
+                <span asp-validation-for="checkoutTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

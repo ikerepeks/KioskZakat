@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="Shortcut Icon" href="~/favicon.ico" type="image/x-icon" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - KioskZakat</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body style="background-image: linear-gradient(white, #8dc63f);">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light py-0" style="background-color:#5b155b;">
+            <!-- Brand/logo -->
+            <div id="admin" class="navbar-brand mx-auto">
+                <a class="" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/Image/uitm-vector-logo.png" style="width: 60px">
+                </a>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="">
+            @RenderBody()
+        </main>
+        <div class="footer" style="left:0;background-color:#5b155b;line-height:50px">
+            <p class="text-center" style="color:white;font-weight:bold;">Ayuh Menderma Bersama Zakat UiTM, Bantu Mereka Yang Memerluka<a href="/Admin/"style="color: white;text-decoration:none;">n</a></p>
+        </div>
+    </div>
+
+    
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        $("#admin").mousedown(function (e) {
+            clearTimeout(this.downTimer);
+            this.downTimer = setTimeout(function () {
+                window.location.replace("/Admin/");
+            }, 2000);
+        }).mouseup(function (e) {
+            clearTimeout(this.downTimer);
+        });
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

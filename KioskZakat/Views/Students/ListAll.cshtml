@@ -1,0 +1,78 @@
+﻿@model IEnumerable<KioskZakat.Models.Student>
+
+@{
+    ViewData["Title"] = "List Of Student";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nama)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.noBilik)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.kodProgram)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.semester)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.checkout)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.kunci)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tag)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.checkoutTime)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in @Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nama)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.noBilik)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.kodProgram)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.semester)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.checkout)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.kunci)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tag)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.checkoutTime)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.noMatric">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.noMatric">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.noMatric">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

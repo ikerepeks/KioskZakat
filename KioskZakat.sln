@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KioskZakat", "KioskZakat\KioskZakat.csproj", "{964BC8F9-3828-4030-95FE-B214CCFC6F51}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{964BC8F9-3828-4030-95FE-B214CCFC6F51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{964BC8F9-3828-4030-95FE-B214CCFC6F51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{964BC8F9-3828-4030-95FE-B214CCFC6F51}.Debug|x64.ActiveCfg = Debug|x64
+		{964BC8F9-3828-4030-95FE-B214CCFC6F51}.Debug|x64.Build.0 = Debug|x64
+		{964BC8F9-3828-4030-95FE-B214CCFC6F51}.Debug|x86.ActiveCfg = Debug|x86
+		{964BC8F9-3828-4030-95FE-B214CCFC6F51}.Debug|x86.Build.0 = Debug|x86
+		{964BC8F9-3828-4030-95FE-B214CCFC6F51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{964BC8F9-3828-4030-95FE-B214CCFC6F51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{964BC8F9-3828-4030-95FE-B214CCFC6F51}.Release|x64.ActiveCfg = Release|x64
+		{964BC8F9-3828-4030-95FE-B214CCFC6F51}.Release|x64.Build.0 = Release|x64
+		{964BC8F9-3828-4030-95FE-B214CCFC6F51}.Release|x86.ActiveCfg = Release|x86
+		{964BC8F9-3828-4030-95FE-B214CCFC6F51}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5205FDF1-2850-403C-89B2-3C52C88506EB}
+	EndGlobalSection
+EndGlobal

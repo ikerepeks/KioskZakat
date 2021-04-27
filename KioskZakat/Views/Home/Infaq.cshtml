@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<!-- Infaq page, all button will execute transac, success check, save to db, print receipt, back to Index -->
+<script type="text/javascript" src="~/js/timeout.js"></script>
+<link rel="stylesheet" href="~/css/button.css" />
+<link rel="stylesheet" href="~/css/hide.css">
+
+<div class="text-center pt-5 pb-3">
+    <h1 class="fs-1 fw-bold">Pilih Jumlah Infaq</h1>
+</div>
+
+
+<div class="container">
+    <div class="hidden">
+        <form asp-action="SendENQ" method="get">
+            <input type="text" name="type" value="1" hidden />
+            <div id="show" class="multi-button pt-5">
+                <button type="submit" value="1" name="amount">RM1.00</button>
+                <button type="submit" value="5" name="amount">RM5.00</button>
+                <button type="submit" value="10" name="amount">RM10.00</button>
+            </div>
+        </form>
+        <div class="container text-center pt-5">
+            <form asp-action="Index">
+                <div class="form-group">
+                    <input type="submit" class="btn btn-warning" value="Kembali" />
+                </div>
+            </form>
+        </div>
+        <div class="text-center pt-3">
+            <p id="alert" style="color:red;display:none;"><strong>Loading, Please Wait</strong></p>
+        </div>
+
+    </div>
+</div>
+
+
+

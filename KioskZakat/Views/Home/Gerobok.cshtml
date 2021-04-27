@@ -1,0 +1,56 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<!-- Gerobok page, all button will execute transac, success check, save to db, print receipt, back to Index -->
+<script type="text/javascript" src="~/js/timeout.js"></script>
+<link rel="stylesheet" href="~/css/hide.css">
+<div class="text-center pt-5 pb-3">
+    <h1 class="fs-1 fw-bold">Pilih Item Gerobok</h1>
+</div>
+
+<div class="hidden">
+    <form asp-action="SendENQ" method="get">
+        <input type="text" name="type" value="2" hidden />
+        <div class="container pt-4">
+            <div id="show" class="row">
+                <div class="col-4 pb-4 text-center">
+                    <img src="~/Image/hamper10.png" class="w-50 h-50"> <input type="hidden" name="message" value="Infaq Minyak Masak">
+                    <h2 class="text-center pt-2">Pakej 1</h2>
+                    <p class="text-center">Beras 5kg, Gula 2kg, Tepung 2kg</p>
+                    <button type="submit" name="amount" class="btn btn-primary"
+                            value="15">
+                        RM15.00
+                    </button>
+                </div>
+                <div class="col-4 pb-4 text-center">
+                    <img src="~/Image/hamper20.png" class="w-50 h-50">
+                    <h2 class="text-center pt-2">Pakej 2</h2>
+                    <p class="text-center">Beras 5kg, Gula 2kg, Telur Gred C, Tepung 2kg</p>
+                    <button type="submit" name="amount" class="btn btn-primary"
+                            value="30">
+                        RM30.00
+                    </button>
+                </div>
+                <div class="col-4 pb-4 text-center">
+                    <img src="~/Image/hamper50.png" class="w-50 h-50">
+                    <h2 class="text-center pt-2">Pakej 3</h2>
+                    <p class="text-center">Beras 10kg, Telur Gred A, Gula 2kg, Tepung 2kg</p>
+                    <button type="submit" name="amount" class="btn btn-primary"
+                            value="50">
+                        RM50.00
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="container text-center pt-5">
+        <form asp-action="Index">
+            <div class="form-group">
+                <input type="submit" class="btn btn-warning" value="Kembali" />
+            </div>
+        </form>
+    </div>
+    <div class="text-center pt-3">
+        <p id="alert" style="color:red;display:none;"><strong>Loading, Please Wait</strong></p>
+    </div>
+</div>

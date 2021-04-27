@@ -1,0 +1,65 @@
+﻿@model IEnumerable<KioskZakat.Models.Purchase>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<script type="text/javascript" src="~/js/timeout.js"></script>
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.icNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.couponNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.validUntil)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.transacTrace)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.icNum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.couponNum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.validUntil)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.transacTrace)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div class="text-center pt-5 pb-3">
+    <form asp-action="Index" asp-controller="Admin">
+        <button type="submit" class="btn btn-primary text-center">Admin Home</button>
+    </form>
+</div>
