@@ -68,13 +68,15 @@ namespace KioskZakat.Migrations
 
             modelBuilder.Entity("KioskZakat.Models.Student", b =>
                 {
-                    b.Property<string>("noMatric")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("checkout")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("checkoutTime")
+                    b.Property<DateTime?>("checkoutTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("kodProgram")
@@ -89,18 +91,16 @@ namespace KioskZakat.Migrations
                     b.Property<string>("noBilik")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("semester")
-                        .HasColumnType("int");
+                    b.Property<string>("noMatric")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("semester")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("tag")
                         .HasColumnType("bit");
 
-                    b.Property<byte[]>("time")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.HasKey("noMatric");
+                    b.HasKey("Id");
 
                     b.ToTable("Student");
                 });

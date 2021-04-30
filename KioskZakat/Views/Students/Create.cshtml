@@ -37,26 +37,9 @@
                 <input asp-for="semester" class="form-control" />
                 <span asp-validation-for="semester" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="checkout" /> @Html.DisplayNameFor(model => model.checkout)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="kunci" /> @Html.DisplayNameFor(model => model.kunci)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="tag" /> @Html.DisplayNameFor(model => model.tag)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="checkoutTime" class="control-label"></label>
-                <input asp-for="checkoutTime" class="form-control" />
-                <span asp-validation-for="checkoutTime" class="text-danger"></span>
-            </div>
+
+
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

@@ -31,10 +31,33 @@
   <ItemGroup>
     <Compile Remove="Migrations\20210427023108_edit-student-database-v2.cs" />
     <Compile Remove="Migrations\20210427023108_edit-student-database-v2.Designer.cs" />
+    <Compile Remove="Migrations\20210427023244_edit-student-database.cs" />
+    <Compile Remove="Migrations\20210427023244_edit-student-database.Designer.cs" />
+    <Compile Remove="Migrations\20210427051942_edit-student-table-v2.cs" />
+    <Compile Remove="Migrations\20210427051942_edit-student-table-v2.Designer.cs" />
+    <Compile Remove="Migrations\20210427052317_edit-student-database.cs" />
+    <Compile Remove="Migrations\20210427052317_edit-student-database.Designer.cs" />
+    <Compile Remove="Migrations\20210427054632_edit-student-table-v2.cs" />
+    <Compile Remove="Migrations\20210427054632_edit-student-table-v2.Designer.cs" />
+    <Compile Remove="Migrations\20210427055120_edit-student-table-v2.cs" />
+    <Compile Remove="Migrations\20210427055120_edit-student-table-v2.Designer.cs" />
+    <Compile Remove="Migrations\20210427055439_edit-student-table.cs" />
+    <Compile Remove="Migrations\20210427055439_edit-student-table.Designer.cs" />
+    <Compile Remove="Migrations\20210430062611_update_primaryKey_student.cs" />
+    <Compile Remove="Migrations\20210430062611_update_primaryKey_student.Designer.cs" />
+    <Compile Remove="Migrations\20210430062927_update_semester_student.cs" />
+    <Compile Remove="Migrations\20210430062927_update_semester_student.Designer.cs" />
+    <Compile Remove="Migrations\20210430063210_update-semester.cs" />
+    <Compile Remove="Migrations\20210430063210_update-semester.Designer.cs" />
+    <Compile Remove="Migrations\20210430064339_update-student-table.cs" />
+    <Compile Remove="Migrations\20210430064339_update-student-table.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="ESC-POS-USB-NET" Version="1.1.3" />
+    <PackageReference Include="ExcelDataReader" Version="3.6.0" />
+    <PackageReference Include="ExcelDataReader.DataSet" Version="3.6.0" />
+    <PackageReference Include="LinqToExcel" Version="1.11.0" />
     <PackageReference Include="Microsoft.Data.SqlClient.SNI.runtime" Version="2.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.13">
@@ -45,6 +68,8 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
     <PackageReference Include="MySqlConnector" Version="1.3.2" />
     <PackageReference Include="QRCoder" Version="1.4.1" />
+    <PackageReference Include="System.Data.OleDb" Version="5.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
     <PackageReference Include="System.IO" Version="4.3.0" />
     <PackageReference Include="System.IO.Ports" Version="5.0.1" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />

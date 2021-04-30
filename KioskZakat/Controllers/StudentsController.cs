@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KioskZakat.Data;
 using KioskZakat.Models;
+using System.IO;
+using System.Data;
+using Microsoft.AspNetCore.Http;
+using System.Net.Http.Headers;
+using System.Data.OleDb;
+using System.Data.SqlClient;
 
 namespace KioskZakat.Controllers
 {
@@ -19,12 +22,17 @@ namespace KioskZakat.Controllers
             _context = context;
         }
 
-        // GET: Students
         public IActionResult Index()
         {
             return View();
         }
+
+        public IActionResult ExcelUpload()
+        {
+            return View();
+        }
         
+        // List all of the student (old Index)
         public async Task<IActionResult> ListAll()
         {
             return View(await _context.Student.ToListAsync());
@@ -55,8 +63,6 @@ namespace KioskZakat.Controllers
         }
 
         // POST: Students/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("noMatric,nama,noBilik,kodProgram,semester,checkout,kunci,tag,checkoutTime")] Student student)
@@ -87,8 +93,6 @@ namespace KioskZakat.Controllers
         }
 
         // POST: Students/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit([Bind("noMatric,nama,noBilik,kodProgram,semester,checkout,kunci,tag,checkoutTime")] Student student)
@@ -98,6 +102,7 @@ namespace KioskZakat.Controllers
             {
                 try
                 {
+
                     _context.Update(student);
                     await _context.SaveChangesAsync();
                 }
@@ -146,6 +151,105 @@ namespace KioskZakat.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public FileResult DownloadExcel()
+        {
+            string Path = "Doc/Users.xlsx";
+            return File(Path, "application/vnd.ms-excel", "Users.xlsx");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ImportExcelFile(IFormFile FormFile)
+        {
+            //get file name
+            var filename = ContentDispositionHeaderValue.Parse(FormFile.ContentDisposition).FileName.Trim('"');
+
+            //get path
+            var MainPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads");
+
+            //create directory "Uploads" if it doesn't exists
+            if (!Directory.Exists(MainPath))
+            {
+                Directory.CreateDirectory(MainPath);
+            }
+
+            //get file path
+            var filePath = Path.Combine(MainPath, FormFile.FileName);
+            using (System.IO.Stream stream = new FileStream(filePath, FileMode.Create))
+            {
+                await FormFile.CopyToAsync(stream);
+            }
+
+            //get extension
+            string extension = Path.GetExtension(filename);
+
+            string conString = string.Empty;
+
+            switch (extension)
+            {
+                case ".xls": //Excel 97-03
+                    conString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + filePath + ";Extended Properties='Excel 8.0;HDR=YES'";
+                    break;
+                case ".xlsx": //Excel 07 and above
+                    conString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + filePath + ";Extended Properties='Excel 8.0;HDR=YES'";
+                    break;
+            }
+
+            DataTable dt = new DataTable();
+            conString = string.Format(conString, filePath);
+
+            using (OleDbConnection connExcel = new OleDbConnection(conString)){
+                using (OleDbCommand cmdExcel = new OleDbCommand())
+                {
+                    using (OleDbDataAdapter odaExcel = new OleDbDataAdapter())
+                    {
+                        cmdExcel.Connection = connExcel;
+
+                        // Get the name of First Sheet
+                        connExcel.Open();
+                        DataTable dtExcelSchema;
+                        dtExcelSchema = connExcel.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+                        string sheetName = dtExcelSchema.Rows[0]["TABLE_NAME"].ToString();
+                        connExcel.Close();
+
+                        // Read Data from First Sheet
+                        connExcel.Open();
+                        cmdExcel.CommandText = "SELECT * From [" + sheetName + "]";
+                        odaExcel.SelectCommand = cmdExcel;
+                        odaExcel.Fill(dt);
+                        connExcel.Close();
+                    }
+                }
+            }
+
+            // your database connection string
+            conString = "Server=(localdb)\\mssqllocaldb;Database=KioskZakatContext-754d7dfc-50ad-4b72-ae40-911b90a0152f;Trusted_Connection=True;MultipleActiveResultSets=true";
+
+            using (SqlConnection con = new SqlConnection(conString))
+            {
+                using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(con))
+                {
+                    // Set the database table name
+                    sqlBulkCopy.DestinationTableName = "dbo.Student";
+
+                    // Map Excel columns with database table
+
+                    sqlBulkCopy.ColumnMappings.Add("NO PELAJAR", "noMatric");
+                    sqlBulkCopy.ColumnMappings.Add("NAMA", "nama");
+                    sqlBulkCopy.ColumnMappings.Add("NO RUMAH", "noBilik");
+                    sqlBulkCopy.ColumnMappings.Add("KOD PROGRAM", "kodProgram");
+                    sqlBulkCopy.ColumnMappings.Add("SEM", "semester");
+
+                    con.Open();
+                    sqlBulkCopy.WriteToServer(dt);
+                    con.Close();
+                }
+            }
+            // if code reach here, everything is okay
+            ViewBag.Message = "File Imported and excel data saved into database";
+
+            return View("ExcelUpload");
+        }
+        
         private bool StudentExists(string id)
         {
             return _context.Student.Any(e => e.noMatric == id);

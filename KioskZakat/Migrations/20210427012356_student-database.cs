@@ -18,7 +18,6 @@ namespace KioskZakat.Migrations
                     semester = table.Column<int>(nullable: false),
                     checkout = table.Column<bool>(nullable: false),
                     kunci = table.Column<bool>(nullable: false),
-                    time = table.Column<byte[]>(rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {

@@ -171,7 +171,7 @@ namespace KioskZakat.Controllers
             if (type == 1) { item = "Infaq"; }
             else if (type == 2) { item = "Gerobok"; }
 
-            Printer printer = new Printer("MS-D347 (Copy 2)");
+            Printer printer = new Printer("MS-D347");
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
             printer.AlignCenter();
             printer.Append("Transaction Number:" + transacNum);
@@ -215,7 +215,7 @@ namespace KioskZakat.Controllers
             Bitmap qrCodeImage = qrCode.GetGraphic(20);
 
             //similar printer execution with printreceipt
-            Printer printer = new Printer("MS-D347 (Copy 2)");
+            Printer printer = new Printer("MS-D347");
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
             printer.Separator();
             printer.AlignCenter();
