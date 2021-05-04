@@ -4,59 +4,75 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Sahkan Maklumat Berikut</h1>
+<h1 class="pt-2">Sahkan Maklumat Berikut</h1>
 
-<h4>Pelajar</h4>
+<h4 class="pt-1">Pelajar</h4>
 <hr />
 <div class="container">
     
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="noMatric" />
-            <div class="row">
-                <div class="col-6">
-                    <label asp-for="nama" class="control-label">Nama:</label>
-                    <input asp-for="nama" class="form-control" readonly/>
-                    <span asp-validation-for="nama" class="text-danger"></span>
-                </div>
-                <div class="col-6">
-                    <label asp-for="noBilik" class="control-label">Nombor Bilik:</label>
-                    <input asp-for="noBilik" class="form-control" readonly/>
-                    <span asp-validation-for="noBilik" class="text-danger"></span>
-                </div>
+    <form asp-action="SavetoDB" asp-controller="Checkouts" method="get">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="noMatric" name="matric"/>
+        <div class="row">
+            <div class="col-6">
+                <label asp-for="nama" class="control-label">Nama:</label>
+                <input asp-for="nama" class="form-control" name="nama" readonly />
+                <span asp-validation-for="nama" class="text-danger"></span>
             </div>
-            <div class="row pt-1">
-                <div class="col-6">
-                    <label asp-for="kodProgram" class="control-label">Kod Program:</label>
-                    <input asp-for="kodProgram" class="form-control" readonly/>
-                    <span asp-validation-for="kodProgram" class="text-danger"></span>
-                </div>
-                <div class="col-6">
-                    <label asp-for="semester" class="control-label">Semester: </label>
-                    <input asp-for="semester" class="form-control" readonly/>
-                    <span asp-validation-for="semester" class="text-danger"></span>
-                </div>
+            <div class="col-6">
+                <label asp-for="noBilik" class="control-label">Nombor Bilik:</label>
+                <input asp-for="noBilik" class="form-control"readonly name="noBilik" />
+                <span asp-validation-for="noBilik" class="text-danger"></span>
             </div>
-            
-            <div class="row pt-2 align-content-center">
-                <p class="col-12"><strong>PENGAKUAN PENYERAHAN</strong></p>
-                <ol class="col-12">
-                    <li>
-                        Saya Telah membersihkan bilik yang saya duduki dengan sempurna. Tiada kehilangan atau kerosakan alat-alat
+        </div>
+        <div class="row pt-1">
+            <div class="col-6">
+                <label asp-for="kodProgram" class="control-label">Kod Program:</label>
+                <input asp-for="kodProgram" class="form-control" readonly name="kodProgram" />
+                <span asp-validation-for="kodProgram" class="text-danger"></span>
+            </div>
+            <div class="col-6">
+                <label asp-for="semester" class="control-label">Semester: </label>
+                <input asp-for="semester" class="form-control" readonly name="semester"/>
+                <span asp-validation-for="semester" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row pt-2 align-content-center">
+            <p class="col-12"><strong>PENGAKUAN PENYERAHAN</strong></p>
+            <table class="table table-borderless">
+                <tr>
+                    <td>
+                        1. Saya Telah membersihkan bilik yang saya duduki dengan sempurna. Tiada kehilangan atau kerosakan alat-alat
                         kelengkapan yang saya gunakan. Tiada barang-barang persendirian yang saya tinggalkan di dalam bilik yang
                         diduduki
-                    </li>
-                    <li>Sekiranya pengakuan yang saya berikan tidak benar, saya bersedia menerima sebarang tindakan ke atas diri saya</li>
-                </ol>
-            </div>
-        
-            <div class="row pt-2">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+                    </td>
+                </tr>
+                <tr><td>2. Sekiranya pengakuan yang saya berikan tidak benar, saya bersedia menerima sebarang tindakan ke atas diri saya</td></tr>
+            </table>
+        </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+        <div class="row align-content-center">
+            <table class="table table-borderless">
+                <tr><td>Saya Telah Menyerahkan: (Sila Tanda yang berkenaan)</td></tr>
+                <tr>
+                    <td>
+                        <div class="row">
+                            <div class="col-6">
+                                <input type="checkbox" name="key" /> Kunci
+                            </div>
+                            <div class="col-6">
+                                <input type="checkbox" name="tag" /> Tag Kunci
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="row pb-4">
+            <input type="submit" value="Setuju dan Simpan" class="btn btn-primary" />
+        </div>
+    </form>
+    </div>
 

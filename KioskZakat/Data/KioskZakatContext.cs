@@ -23,5 +23,7 @@ namespace KioskZakat.Data
         public DbSet<KioskZakat.Models.Purchase> Purchase { get; set; }
 
         public DbSet<KioskZakat.Models.Student> Student { get; set; }
+
+        public DbSet<KioskZakat.Models.Checkout> Checkout { get; set; }
     }
 }

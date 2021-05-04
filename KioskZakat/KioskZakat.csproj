@@ -51,6 +51,12 @@
     <Compile Remove="Migrations\20210430063210_update-semester.Designer.cs" />
     <Compile Remove="Migrations\20210430064339_update-student-table.cs" />
     <Compile Remove="Migrations\20210430064339_update-student-table.Designer.cs" />
+    <Compile Remove="Migrations\20210504004941_checkout_table.cs" />
+    <Compile Remove="Migrations\20210504004941_checkout_table.Designer.cs" />
+    <Compile Remove="Migrations\20210504005243_checkout.cs" />
+    <Compile Remove="Migrations\20210504005243_checkout.Designer.cs" />
+    <Compile Remove="Migrations\20210504005538_checkout-table.cs" />
+    <Compile Remove="Migrations\20210504005538_checkout-table.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

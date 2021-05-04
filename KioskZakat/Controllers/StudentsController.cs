@@ -84,7 +84,7 @@ namespace KioskZakat.Controllers
                 return View("Index");
             }
 
-            var student = await _context.Student.FindAsync(id);
+            var student = await _context.Student.Where(x => x.noMatric == id).SingleAsync();
             if (student == null)
             {
                 return View("Index");
