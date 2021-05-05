@@ -149,7 +149,7 @@ namespace KioskZakat.Controllers
                 if (checker.Equals("00"))
                 {
                     string TransacTrace = TransacCheck(ls_receive, 2);
-                    await SaveToDatabaseAsync(ic, TransacTrace, itemId, type);
+                    //await SaveToDatabaseAsync(ic, TransacTrace, itemId, type);
                     PrintReceipt(TransacTrace,price,type);
                     sendWhatsApp(type);
                     Settlement();
@@ -171,24 +171,37 @@ namespace KioskZakat.Controllers
             if (type == 1) { item = "Infaq"; }
             else if (type == 2) { item = "Gerobok"; }
 
-            Printer printer = new Printer("MS-D347");
-            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-            printer.AlignCenter();
-            printer.Append("Transaction Number:" + transacNum);
-            printer.Separator();
-            printer.AlignCenter();
-            Bitmap image = new Bitmap(Bitmap.FromFile("wwwroot/Image/uitm.bmp"));
-            printer.Image(image);
-            printer.Separator();
-            printer.Append("Servis: " + item);
-            printer.NewLines(2);
-            printer.Append("Total Amount: RM " + amount + ".00");
-            printer.Separator();
-            printer.Append("Terima Kasih kerana menggunakan kiosk Zakat");
-            printer.Separator();
-            printer.FullPaperCut();
-            printer.PrintDocument();
-            
+            StringBuilder line1 = new StringBuilder("Transaction Number:" + transacNum);
+            StringBuilder line2 = new StringBuilder("Servis: " + item);
+            StringBuilder line3 = new StringBuilder("Total Amount: RM " + amount + ".00");
+            StringBuilder line4 = new StringBuilder("Terima Kasih kerana menggunakan kiosk Zakat");
+            StringBuilder separator = new StringBuilder("-------------------------------------------");
+
+            PrinterDLL.SetClean();
+            PrinterDLL.PrintFeedline(5);
+            PrinterDLL.SetAlignment(1);
+            PrinterDLL.SetSizetext(1, 1);
+            PrinterDLL.SetLinespace(60);
+            PrinterDLL.PrintString(line1);
+            PrinterDLL.PrintString(separator);
+
+            PrinterDLL.PrintFeedline(1);
+            PrinterDLL.SetAlignment(0);
+            PrinterDLL.PrintString(line2);
+            PrinterDLL.SetAlignment(0);
+            PrinterDLL.PrintString(line3);
+
+            PrinterDLL.PrintFeedline(1);
+            PrinterDLL.SetAlignment(0);
+            PrinterDLL.PrintString(line4);
+
+            PrinterDLL.PrintFeedline(1);
+            PrinterDLL.SetAlignment(1);
+            PrinterDLL.PrintString(separator);
+
+            PrinterDLL.PrintFeedline(5);
+            PrinterDLL.PrintCutpaper(0);
+
             return View("Success");
         }
 
@@ -202,35 +215,60 @@ namespace KioskZakat.Controllers
             string finalVoucher = voucher[index];
             */
 
-            //Demo purpose data
-            var voucher = new List<string> { "UITMZAKAT001", "UITMZAKAT002"};
-            var random = new Random();
-            int index = random.Next(voucher.Count);
-            string finalVoucher = voucher[index];
+            int m_iInit = -1;
+            StringBuilder sPort = new StringBuilder("USB001");
+            PrinterDLL.SetPrintport(sPort, 9600);
+            m_iInit = PrinterDLL.SetInit();
+            if (m_iInit == 0)
+            {
+                //Demo purpose data
+                var voucher = new List<string> { "UITMZAKAT001", "UITMZAKAT002" };
+                var random = new Random();
+                int index = random.Next(voucher.Count);
+                string finalVoucher = voucher[index];
 
-            //generate QR from voucher
-            QRCodeGenerator qrGenerator = new QRCodeGenerator();
-            QRCodeData qrCodeData = qrGenerator.CreateQrCode(finalVoucher, QRCodeGenerator.ECCLevel.Q);
-            QRCode qrCode = new QRCode(qrCodeData);
-            Bitmap qrCodeImage = qrCode.GetGraphic(20);
+                //generate QR from voucher
+                QRCodeGenerator qrGenerator = new QRCodeGenerator();
+                QRCodeData qrCodeData = qrGenerator.CreateQrCode(finalVoucher, QRCodeGenerator.ECCLevel.Q);
+                QRCode qrCode = new QRCode(qrCodeData);
+                Bitmap qrCodeImage = qrCode.GetGraphic(20);
+                Printer printer = new Printer("MS-D347");
 
-            //similar printer execution with printreceipt
-            Printer printer = new Printer("MS-D347");
-            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-            printer.Separator();
-            printer.AlignCenter();
-            printer.Image(qrCodeImage);
-            printer.Separator();
-            printer.AlignCenter();
-            printer.Append(finalVoucher);
-            printer.NewLines(2);
-            printer.Separator();
-            printer.Append("Terima Kasih kerana menggunakan kiosk Zakat");
-            printer.Separator();
-            printer.FullPaperCut();
-            printer.PrintDocument();
-            
-            return View("Success");
+                StringBuilder sbData = new StringBuilder("This is your voucher");
+                StringBuilder sbData1 = new StringBuilder(finalVoucher);
+                StringBuilder sbData3 = new StringBuilder("Terima Kasih kerana menggunakan kiosk Zakat");
+                StringBuilder separator = new StringBuilder("---------------------------");
+                PrinterDLL.SetClean();
+                PrinterDLL.PrintFeedline(5);
+                PrinterDLL.SetAlignment(1);
+                PrinterDLL.SetSizetext(1, 1);
+                PrinterDLL.SetLinespace(60);
+                PrinterDLL.PrintString(sbData);
+
+                PrinterDLL.PrintFeedline(2);
+                printer.Image(qrCodeImage);
+                printer.PrintDocument();
+
+                PrinterDLL.SetAlignment(0);
+                PrinterDLL.PrintString(sbData1);
+
+                PrinterDLL.SetAlignment(1);
+                PrinterDLL.PrintString(sbData3);
+
+                PrinterDLL.PrintFeedline(3);
+                PrinterDLL.SetAlignment(1);
+                PrinterDLL.PrintString(separator);
+
+                PrinterDLL.PrintFeedline(5);
+                PrinterDLL.PrintCutpaper(0);
+
+                return View("Success");
+
+            }
+            else
+            {
+                return View("Failed");
+            }
         }
 
         //check for status code for reply message to check trasaction status

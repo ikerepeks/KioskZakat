@@ -26,97 +26,6 @@ namespace KioskZakat.Controllers
             return View(await _context.Checkout.ToListAsync());
         }
 
-        // GET: Checkouts/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var checkout = await _context.Checkout
-                .FirstOrDefaultAsync(m => m.noMatric == id);
-            if (checkout == null)
-            {
-                return NotFound();
-            }
-
-            return View(checkout);
-        }
-
-        // GET: Checkouts/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Checkouts/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("noMatric,nama,noBilik,kodProgram,semester,checkout,kunci,tag")] Checkout checkout)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(checkout);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(checkout);
-        }
-
-        // GET: Checkouts/Edit/5
-        public async Task<IActionResult> Edit(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var checkout = await _context.Checkout.FindAsync(id);
-            if (checkout == null)
-            {
-                return NotFound();
-            }
-            return View(checkout);
-        }
-
-        // POST: Checkouts/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("noMatric,nama,noBilik,kodProgram,semester,checkout,kunci,tag")] Checkout checkout)
-        {
-            if (id != checkout.noMatric)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(checkout);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CheckoutExists(checkout.noMatric))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(checkout);
-        }
-
         // GET: Checkouts/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
@@ -151,6 +60,7 @@ namespace KioskZakat.Controllers
             return _context.Checkout.Any(e => e.noMatric == id);
         }
         
+        //save to checkout db, data taken from student db after aggreing
         [HttpGet]
         public async Task<IActionResult> SavetoDB(string matric, string nama, string noBilik, string kodProgram, string semester, bool key, bool tag)
         {
